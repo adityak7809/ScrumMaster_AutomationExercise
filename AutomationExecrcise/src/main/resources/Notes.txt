@@ -1,0 +1,29 @@
+Github 
+
+url:-
+https://github.com/adityak7809/ScrumMaster_AutomationExercise.git
+
+username:- 
+adityak7809
+
+token:-
+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
+
+
+For Create GitHub tokens-
+1.Click left side profile icon
+2.Click Settings
+3.On left options, scroll bottom, click on Developer Settings
+4.Left side click- Personal Access Tokens- Tokens(Classic)
+5.Click - Generate New Token(Classic)
+6.Select the options
+  Notes textfield- Give project name
+  Expiration- No Expiration
+  Tick checkbox- repo
+                 delete:packages
+                 delete_repo
+                 project 
+7.Click Generate Token
+8.Copy and save the token
+
+
