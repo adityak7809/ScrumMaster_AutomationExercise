@@ -1,12 +1,12 @@
 Github 
 
 url:-
-https://github.com/adityak7809/ScrumMaster_AutomationExercise.git
+
 
 username:- 
-adityak7809
 
-token:-
+
+
 
 
 
