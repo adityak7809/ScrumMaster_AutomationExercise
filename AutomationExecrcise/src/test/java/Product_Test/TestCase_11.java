@@ -1,60 +1,73 @@
 package Product_Test;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import java.io.IOException;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import ExcelUtility.ReadExcelFile;
 import GenericRepository.BaseConfig;
 import ListnersUtility.Listners_Imp;
+import PageRepository.HomePage;
+import PropertyUtility.ReadPropertyFile;
 
 @Listeners(Listners_Imp.class)
 public class TestCase_11 extends BaseConfig {
 
+
+
+
 	@Test
-	public void Verify_Subscription_in_Cart_page() {
+	public void Verify_Subscription_in_Cart_page() throws EncryptedDocumentException, IOException {
+
+		// Create Object Ref. variable
+		ReadExcelFile exObj=new ReadExcelFile();
+		ReadPropertyFile propObj=new ReadPropertyFile();
+
+		//POM Class
+		HomePage homePageObj=new HomePage(driver);
 
 		// 1. Launch browser- Script in BaseConfig
 
-		// Javascript Code
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 
 		// 2. Navigate to url 'http://automationexercise.com'- Script in BaseConfig
-		
-		
+
+
 		// 3. Verify that home page is visible successfully
-		String actualPageTitle = driver.getTitle();
-		String expectedPageTitle = "Automation Exercise";
-		if (actualPageTitle.equals(expectedPageTitle)) {
-			System.out.println("Home page is visible successfully");
+		String expectedPageTitle = propObj.readData("homePageTitle");
+		String actualPageTitle = homePageObj.getHomePageTitle(driver);
+
+		if(actualPageTitle.equals(expectedPageTitle)) {
+			Reporter.log("Home page is visible successfully",true);
 		} else {
-			System.out.println("Home page is not displayed");
+			Reporter.log("Home page is not displayed", true);
 		}
 
 		// 4. Click 'Cart' button
-		driver.findElement(By.xpath("//a[@href='/view_cart']")).click();
+		homePageObj.clickCartLink();
 
 		// 5. Scroll down to footer
-		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-		javascriptExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		jsScrollToBottom();
 
 		// 6. Verify text 'SUBSCRIPTION'
-		if (driver.findElement(By.xpath("//h2[text()='Subscription']")).isDisplayed()) {
-			System.out.println("'SUBSCRIPTION' text is visible");
+		boolean subscriptionHeader = homePageObj.isSubscriptionHeaderDisplayed();
+		if (subscriptionHeader==true) {
+			Reporter.log("'SUBSCRIPTION' text is visible",true);
 		} else {
-			System.out.println("'SUBSCRIPTION' text is not visible");
+			Reporter.log("'SUBSCRIPTION' text is not visible",true);
 		}
 
 		// 7. Enter email address in input and click arrow button
-		String subscriberEmail = "abc@gmail.com";
-		driver.findElement(By.id("susbscribe_email")).sendKeys(subscriberEmail);
-		driver.findElement(By.id("subscribe")).click();
-
+		String subscriptionEmail = exObj.readData("Login Data", 1, 1);
+		homePageObj.subscribeToNewsletter(subscriptionEmail);
+		
 		// 8. Verify success message is visible
-		if (driver.findElement(By.xpath("//div[text()='You have been successfully subscribed!']")).isDisplayed()) {
-			System.out.println("Subscription success message is visible");
+		if (homePageObj.isSubscriptionSuccessful()==true) {
+			Reporter.log("'You have been successfully subscribed!' is visible",true);
 		} else {
-			System.out.println("Subscription success message is not visible");
+			Reporter.log("'You have been successfully subscribed!' is not visible",true);
 		}
 
 

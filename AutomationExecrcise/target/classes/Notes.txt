@@ -1,15 +1,4 @@
-Github 
-
-url:-
-https://github.com/adityak7809/ScrumMaster_AutomationExercise.git
-
-username:- 
-adityak7809
-
-token:-
-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
-
-
+GitHub :-
 For Create GitHub tokens-
 1.Click left side profile icon
 2.Click Settings

@@ -28,7 +28,7 @@ public class ProductsPage {
     private WebElement searchProductTitle;
     
     @FindBy(xpath = "//div[@class='single-products']/div/p")
-    private WebElement searchRelatedProduct;
+    private List<WebElement> searchRelatedProduct;
     
 
     // Filter Section
@@ -57,6 +57,14 @@ public class ProductsPage {
 
     @FindBy(xpath = "//div[contains(@class, 'features_items')]//a[contains(text(), 'View Product')]")
     private List<WebElement> viewProductButtons;
+    
+    @FindBy(xpath = "//u[text()='View Cart']")
+    private WebElement viewCartButtons;
+    
+    @FindBy(xpath = "//button[text()='Continue Shopping']")
+    private WebElement continueShoppingButtons;
+    
+    
 
     // Constructor
     public ProductsPage(WebDriver driver) {
@@ -86,7 +94,10 @@ public class ProductsPage {
     	return searchProductTitle.isDisplayed();
     }
     
- //   public String searchedproductName(List<WebElement> )
+    //Get Searched Products 
+    public List<WebElement> searchedproductName() {
+    	return searchRelatedProduct;
+    }
     
     
    // Click on Women Category
@@ -120,13 +131,26 @@ public class ProductsPage {
     }
 
     // Add Product to Cart
-    public void addProductToCart(int index) {
-        addToCartButtons.get(index).click();
+    public WebElement addProductToCart(int index) {
+        return addToCartButtons.get(index);
     }
-
+    
+    // View Cart Button
+    public WebElement clickViewCartButtons() {
+        return viewCartButtons;
+    }
+    
+    // Continue Shopping Buttons
+    public WebElement clickContinueShoppingButtons() {
+    	return continueShoppingButtons;
+    }
+    
+ 
     // View Product Details
     public WebElement viewProductDetails(int index) {
         return viewProductButtons.get(index);
     }
+    
+    
 
 }

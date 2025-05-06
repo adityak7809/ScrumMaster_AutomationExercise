@@ -111,8 +111,8 @@ public class HomePage {
     }
     
     // Click "View Product" for the First Item
-    public void clickFirstViewProduct() {
-        firstViewProductButton.click();
+    public WebElement clickFirstViewProduct() {
+    	return firstViewProductButton;
     }
 
     // Get Logged-in Username

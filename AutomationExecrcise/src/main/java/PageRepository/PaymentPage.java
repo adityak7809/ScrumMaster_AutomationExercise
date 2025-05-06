@@ -52,8 +52,8 @@ public class PaymentPage {
     }
 
     // Submit Payment
-    public void clickPayAndConfirmOrder() {
-        payAndConfirmOrderButton.click();
+    public WebElement clickPayAndConfirmOrder() {
+        return payAndConfirmOrderButton;
     }
 
     // Verify Order Confirmation
@@ -68,10 +68,4 @@ public class PaymentPage {
         System.out.println("invoice is downloaded successfully");
     }
 
-    // Complete Payment Workflow
-    public void completePayment(String name, String cardNumber, String cvc, String month, String year) {
-        enterPaymentDetails(name, cardNumber, cvc, month, year);
-        clickPayAndConfirmOrder();
-        assert isOrderConfirmed();
-    }
 }

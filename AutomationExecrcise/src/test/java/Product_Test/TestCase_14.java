@@ -1,248 +1,243 @@
 package Product_Test;
 
+import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import ExcelUtility.ReadExcelFile;
 import GenericRepository.BaseConfig;
 import ListnersUtility.Listners_Imp;
+import PageRepository.CheckoutPage;
+import PageRepository.DeleteAccountPage;
+import PageRepository.HomePage;
+import PageRepository.LoginPage;
+import PageRepository.PaymentPage;
+import PageRepository.ProductsPage;
+import PageRepository.SignupPage;
+import PageRepository.ViewCartPage;
+import PropertyUtility.ReadPropertyFile;
 
 @Listeners(Listners_Imp.class)
 public class TestCase_14 extends BaseConfig {
 
 	@Test
-	public void Place_Order_Register_while_Checkout() throws InterruptedException {
+	public void Place_Order_Register_while_Checkout() throws InterruptedException, IOException {
 
-		//Generate random email
-		Random random=new Random();
-		int randomNum1=random.nextInt(1000);
-		int randomNum2=random.nextInt(1000);
+		// Create Object Ref. variable
+		ReadExcelFile exObj=new ReadExcelFile();
+		ReadPropertyFile propObj=new ReadPropertyFile();
 
-		String email="abc"+randomNum1+"xyz"+randomNum2+"@gmail.com";
+		//POM Class
+		DeleteAccountPage deleteAccountPageObj=new DeleteAccountPage(driver);
+		HomePage homePageObj=new HomePage(driver);
+		ProductsPage productsPageObj=new ProductsPage(driver);
+		CheckoutPage checkoutPageObj=new CheckoutPage(driver);
+		ViewCartPage viewCartPageObj=new ViewCartPage(driver);
+		LoginPage loginPageObj=new LoginPage(driver);
+		SignupPage signupPageObj=new SignupPage(driver);
+		PaymentPage paymentPageObj=new PaymentPage(driver);
 
 		// 1. Launch browser- Script in BaseConfig
 
-		// Javascript Code
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		//Explicit Wait
+		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
 
 		// 2. Navigate to url 'http://automationexercise.com'- Script in BaseConfig
 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); 
+		// 3. Verify that home page is visible successfully
+		String expectedPageTitle = propObj.readData("homePageTitle");
+		String actualPageTitle = homePageObj.getHomePageTitle(driver);
 
-		//		3. Verify that home page is visible successfully
-		String actPageTitle=driver.getTitle();
-		String expPageTille="Automation Exercise";
-		if(actPageTitle.equals(expPageTille))
-		{
-			System.out.println("Home page is visible successfully");
-		}
-		else
-		{
-			System.out.println("Home page is not displayed");
+		if(actualPageTitle.equals(expectedPageTitle)) {
+			Reporter.log("Home page is visible successfully",true);
+		} else {
+			Reporter.log("Home page is not displayed", true);
 		}
 
 
-		//		4. Add products to cart
+		// 4. Add products to cart
 		// Add first product
-		WebElement addToCart1= driver.findElement(By.xpath("(//a[@data-product-id='1'])[1]"));
-		js.executeScript("arguments[0].click();", addToCart1);
+		WebElement firstProduct = productsPageObj.addProductToCart(0);
+		jsClick(firstProduct);
 
 		// Click Continue Shopping
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//button[text()='Continue Shopping']")).click();
+		WebElement continueShoppingButton = wait.until(ExpectedConditions.elementToBeClickable(productsPageObj.clickContinueShoppingButtons()));
+		continueShoppingButton.click();
 
 		// Add second product
-		WebElement addToCart2= driver.findElement(By.xpath("(//a[@data-product-id='2'])[1]"));
-		js.executeScript("arguments[0].click();", addToCart2);
+		WebElement secondProduct = productsPageObj.addProductToCart(1);
+		jsClick(secondProduct);
 
 		// Click Continue Shopping
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//button[text()='Continue Shopping']")).click();
+		continueShoppingButton = wait.until(ExpectedConditions.elementToBeClickable(productsPageObj.clickContinueShoppingButtons()));
+		continueShoppingButton.click();
 
 
-		//		5. Click 'Cart' button
-		WebElement cart= driver.findElement(By.xpath("//a[@href='/view_cart']"));
-		cart.click();
+		// 5. Click 'Cart' button
+		homePageObj.clickCartLink();
 
-		//		6. Verify that cart page is displayed
-		String cartTitle="Automation Exercise - Checkout";
-		String actCartTitlte=driver.getTitle();
-
-		if(cartTitle.equals(actCartTitlte))
+		// 6. Verify that cart page is displayed
+		boolean shoppingCart=viewCartPageObj.isShoppingPageDisplayed();
+		if(shoppingCart==true)
 		{
-			System.out.println("Cart page is displayed successfully");
+			Reporter.log("Cart page is displayed successfully",true);
 		}
 		else
 		{
-			System.out.println("Cart page is not displayed");
+			Reporter.log("Cart page is not displayed",true);
 		}
 
-		//		7. Click Proceed To Checkout
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//a[text()='Proceed To Checkout']")).click();
+		// 7. Click Proceed To Checkout
+		viewCartPageObj.clickProceedToCheckout();
 
-		//		8. Click 'Register / Login' button
-		driver.findElement(By.xpath("//u[text()='Register / Login']")).click();
+		// 8. Click 'Register / Login' button
+		viewCartPageObj.clickRegisterLogin();
 
-		//		9. Fill all details in Signup and create account
-		driver.findElement(By.xpath("//div[@class='signup-form']/form/input[2]")).sendKeys("Ogggy");
-		driver.findElement(By.xpath("//input[@data-qa='signup-email']")).sendKeys(email);
+		// 9. Fill all details in Signup and create account
+		String name=exObj.readData("Create Account", 1, 0);
+		String email=exObj.readData("Create Account", 1, 1);
+		loginPageObj.enterSignupName(name);
+		loginPageObj.enterSignupEmail(email);
 
-		driver.findElement(By.xpath("//button[text()='Signup']")).click();
+		loginPageObj.clickSignupButton();
 
-		WebElement gender=driver.findElement(By.id("id_gender1"));
-		js.executeScript("arguments[0].click();", gender);
+		String gender=exObj.readData("Create Account", 1, 2);
+		signupPageObj.selectGender(gender);
+		
 
-		WebElement password=driver.findElement(By.name("password"));
-		js.executeScript("arguments[0].value='abc123'", password);
+		String password=exObj.readData("Create Account", 1, 3);
+		signupPageObj.enterPassword(password);
 
-		WebElement day=driver.findElement(By.id("days"));
-		Select day_drop=new Select(day);
-		day_drop.selectByVisibleText("21");
+		//DOB
+		String day=exObj.readData("Create Account", 1, 4);
+		String month=exObj.readData("Create Account", 1, 5);
+		String year=exObj.readData("Create Account", 1, 6);
+		signupPageObj.selectDateOfBirth(day, month, year);
+		jsClick( signupPageObj.toggleNewsletter());
 
-		WebElement month=driver.findElement(By.id("months"));
-		Select month_drop=new Select(month);
-		month_drop.selectByVisibleText("December");
+		jsClick(signupPageObj.toggleSpecialOffers());
 
-		WebElement year=driver.findElement(By.id("years"));
-		Select year_drop=new Select(year);
-		year_drop.selectByVisibleText("2000");
-		Thread.sleep(2000);
-		WebElement checkbox1 = driver.findElement(By.xpath("//div[@class='checkbox']/div/span/input[@id='newsletter']"));
-		js.executeScript("arguments[0].click();", checkbox1);
+		String firstName=exObj.readData("Create Account", 1, 7);
+		String lastName=exObj.readData("Create Account", 1, 8);
+		String company=exObj.readData("Create Account", 1, 9);
+		String address1=exObj.readData("Create Account", 1, 10);
+		String address2=exObj.readData("Create Account", 1, 11);
+		String country=exObj.readData("Create Account", 1, 12);
+		String state=exObj.readData("Create Account", 1, 13);
+		String city=exObj.readData("Create Account", 1, 14);
+		String zipcode=exObj.readData("Create Account", 1, 15);
+		String mobile_number=exObj.readData("Create Account", 1, 16);
 
-		WebElement checkbox2 = driver.findElement(By.xpath("//div[@class='checkbox']/div/span/input[@id='optin']"));
-		js.executeScript("arguments[0].click();", checkbox2);
+		signupPageObj.enterAddressInfo(firstName, lastName, company, address1, address2, country, state, city, zipcode, mobile_number);
 
-		driver.findElement(By.name("first_name")).sendKeys("Ogggy");
-		driver.findElement(By.name("last_name")).sendKeys("Sharma");
-		driver.findElement(By.name("company")).sendKeys("Q3Technologies");
-		driver.findElement(By.name("address1")).sendKeys("Kondapur");
-		driver.findElement(By.name("address2")).sendKeys("Raghvendra Colony");
+		jsClick(signupPageObj.clickCreateAccount());
 
-		WebElement country= driver.findElement(By.name("country"));
-		Select country_drop=new Select(country);
-		country_drop.selectByVisibleText("India");
+		// 10. Verify 'ACCOUNT CREATED!' and click 'Continue' button
+		boolean accountCreatedText = signupPageObj.isAccountCreatedSuccessfully();
+		if(accountCreatedText==true) {
+			Reporter.log("'ACCOUNT CREATED!' is visible",true);
+			signupPageObj.clickContinue();
+		} else {
+			Reporter.log("'ACCOUNT CREATED!' is not visible",true);
+		}
+		
 
-		js.executeScript("window.scrollBy(0, 400)");
-		driver.findElement(By.name("state")).sendKeys("Talengana");
-		driver.findElement(By.name("city")).sendKeys("Hyderabad");
-		driver.findElement(By.name("zipcode")).sendKeys("500084");
-		driver.findElement(By.name("mobile_number")).sendKeys("9341205186");
+		// 11. Verify ' Logged in as username' at top
+		boolean loggedInText = homePageObj.isUserLoggedIn();
+		if(loggedInText==true) {
+			Reporter.log("'Logged in as username' is visible",true);
+		} else {
+			Reporter.log("'Logged in as username' is not visible",true);
+		}
 
-		js.executeScript("window.scrollBy(0, 400)");
-		driver.findElement(By.xpath("//form[@action='/signup']/button[@type='submit']")).click();
+		// 12.Click 'Cart' button
+		homePageObj.clickCartLink();
 
-		//		10. Verify 'ACCOUNT CREATED!' and click 'Continue' button
-		WebElement text3=driver.findElement(By.xpath("//h2/b"));
-		if(text3.isDisplayed())
+		// 13. Click 'Proceed To Checkout' button
+		viewCartPageObj.clickProceedToCheckout();
+
+		// 14. Verify Address Details and Review Your Order
+		List<WebElement> deleiveryDetails=checkoutPageObj.getDeliveryDetails();
+		List<WebElement> billingDetails=checkoutPageObj.getBillingDetails();
+		List<String> result1=new ArrayList<>();
+		List<String> result2=new ArrayList<>();
+		
+		for(int index1=1; index1<deleiveryDetails.size(); index1++)
 		{
-			System.out.println("'ACCOUNT CREATED!' is visible");
-			driver.findElement(By.xpath("//div[@class='pull-right']/a")).click();
+			String data1=deleiveryDetails.get(index1).getText();
+			result1.add(data1);
+			String data2=billingDetails.get(index1).getText();
+			result2.add(data2);
+		}
+		
+		if(result1.contains(result1))
+		{
+			Reporter.log("Address Details are successfully verified",true);
 		}
 		else
 		{
-			System.out.println("'ACCOUNT CREATED!' is not visible");
+			Reporter.log("Address Details are not verified",true);
 		}
 
-		//		11. Verify ' Logged in as username' at top
-		WebElement text4=driver.findElement(By.xpath("//a[contains(text(),'Logged in as')]"));
-		if(text4.isDisplayed())
+		System.out.println("");
+		for (int productIndex = 0; productIndex <= 1; productIndex++) 
 		{
-			System.out.println("'Logged in as username' is visible");
+			Reporter.log("Product Name: "+viewCartPageObj.getProductName(productIndex),true);
+			Reporter.log("Price: "+viewCartPageObj.getProductPrice(productIndex),true);
+			Reporter.log("Quantity: "+viewCartPageObj.getProductQuantity(productIndex),true);
+			Reporter.log("Total Price: "+viewCartPageObj.getProductTotal(productIndex),true);
+			System.out.println("");
+		}
+
+		// 15. Enter description in comment text area and click 'Place Order'
+		String msg=exObj.readData("Product Detail", 1, 2);
+		checkoutPageObj.clickCommentBox(msg);
+		
+		// 16. Enter payment details: Name on Card, Card Number, CVC, Expiration date
+		String name_on_card = exObj.readData("Payment Details", 1, 0);
+		String card_number = exObj.readData("Payment Details", 1, 1);
+		String cvc = exObj.readData("Payment Details", 1, 2);
+		String expiry_month = exObj.readData("Payment Details", 1, 3);
+		String expiry_year = exObj.readData("Payment Details", 1, 4);
+		paymentPageObj.enterPaymentDetails(name_on_card, card_number, cvc, expiry_month, expiry_year);
+
+		// 17. Click 'Pay and Confirm Order' button
+		WebElement comfirmOrder= paymentPageObj.clickPayAndConfirmOrder();
+		jsClick(comfirmOrder);
+
+		// 18. Verify success message 'Your order has been placed successfully!'
+		boolean successMsg=paymentPageObj.isOrderConfirmed();
+		if(successMsg==true)
+		{
+			Reporter.log("'Your order has been placed successfully!' verified successfully",true);
 		}
 		else
 		{
-			System.out.println("'Logged in as username' is not visible");
+			Reporter.log("'Your order has been placed successfully!' not verified",true);
 		}
 
-		//		12.Click 'Cart' button
-		driver.findElement(By.xpath("(//a[@href=\"/view_cart\"])[1]")).click();
-
-		//		13. Click 'Proceed To Checkout' button
-		driver.findElement(By.xpath("//a[text()='Proceed To Checkout']")).click();
-
-		//		14. Verify Address Details and Review Your Order
-		List<WebElement> deliveryAddress=driver.findElements(By.xpath("//ul[@id='address_delivery']/li"));
-		List<WebElement> billingAddress=driver.findElements(By.xpath("//ul[@id='address_delivery']/li"));
-
-		if(deliveryAddress.containsAll(billingAddress))
-		{
-			System.out.println("Address Details are successfully verified");
-		}
-		else
-		{
-			System.out.println("Address Details are not verified");
-		}
-
-		WebElement prodName=driver.findElement(By.xpath("//a[text()='Blue Top']"));
-		WebElement price=driver.findElement(By.xpath("(//p[text()='Rs. 500'])[1]"));
-		WebElement quantity=driver.findElement(By.xpath("//button[text()='1']"));
-
-		if(prodName.isDisplayed())
-		{
-			if(price.isDisplayed())
-			{
-				if(quantity.isDisplayed())
-				{
-					System.out.println("Review order verified successfully");
-				}
-				else
-				{
-					System.out.println("Review order not verified");
-				}
-			}
-		}
-
-		//		15. Enter description in comment text area and click 'Place Order'
-		driver.findElement(By.name("message")).sendKeys("All details verified successfully");
-		driver.findElement(By.xpath("//a[text()='Place Order']")).click();
-
-		//		16. Enter payment details: Name on Card, Card Number, CVC, Expiration date
-		driver.findElement(By.name("name_on_card")).sendKeys("Oggy Sharma");
-		driver.findElement(By.name("card_number")).sendKeys("1234567891011");
-		driver.findElement(By.name("cvc")).sendKeys("123");
-		driver.findElement(By.name("expiry_month")).sendKeys("10");
-		driver.findElement(By.name("expiry_year")).sendKeys("2026");
-
-		//		17. Click 'Pay and Confirm Order' button
-		WebElement confirmOrder = driver.findElement(By.id("submit"));
-		js.executeScript("arguments[0].click();", confirmOrder);
-
-		//		18. Verify success message 'Your order has been placed successfully!'
-		if(driver.findElement(By.xpath("(//div[@class='alert-success alert'])[1]")).isDisplayed())
-		{
-			System.out.println("'Your order has been placed successfully!' verified successfully");
-		}
-		else
-		{
-			System.out.println("'Your order has been placed successfully!' not verified");
-		}
-
-		//		19. Click 'Delete Account' button
-		driver.findElement(By.xpath("//a[@href='/delete_account']")).click();
+		// 19. Click 'Delete Account' button
+		homePageObj.clickOnDeleteAccount();
 
 
-		//		20. Verify 'ACCOUNT DELETED!' and click 'Continue' button
+		// 20. Verify 'ACCOUNT DELETED!' and click 'Continue' button
 		WebElement text5= driver.findElement(By.xpath("//h2/b[text()='Account Deleted!']"));
-		if(text5.isDisplayed())
-		{
-			System.out.println("'ACCOUNT DELETED!' is visible");
-			driver.findElement(By.xpath("//a[text()='Continue']")).click();
+		boolean accountDeletedText = deleteAccountPageObj.isAccountDeleted();
+		if(accountDeletedText==true) {
+			Reporter.log("'ACCOUNT DELETED!' is visible",true);
+			deleteAccountPageObj.clickContinue();
+		} else {
+			Reporter.log("'ACCOUNT DELETED!' is not visible",true);
 		}
-		else
-		{
-			System.out.println("'ACCOUNT DELETED!' is not visible");
-		}
-
-
 
 	}
 

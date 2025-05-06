@@ -8,13 +8,13 @@
     <parameter name="browser" value="edge"/>
     <parameter name="username" value="Aditya"/>
     <classes>
-      <class name="Product_Test.TestCase_09">
+      <class name="Product_Test.TestCase_14">
         <methods>
-          <include name="Search_Product"/>
+          <include name="Place_Order_Register_while_Checkout"/>
           <include name="browserSetup"/>
           <include name="closebrowser"/>
         </methods>
-      </class> <!-- Product_Test.TestCase_09 -->
+      </class> <!-- Product_Test.TestCase_14 -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

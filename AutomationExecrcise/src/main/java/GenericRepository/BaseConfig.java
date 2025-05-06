@@ -2,7 +2,9 @@ package GenericRepository;
 
 import java.io.IOException;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -20,7 +22,7 @@ public class BaseConfig {
 	public WebDriver driver;
 	public ReadPropertyFile propFileObj;
 	public static WebDriver static_driver;
-	
+
 	@Parameters({"browser", "username"})
 	@BeforeClass
 	public void browserSetup(String browser, String username) throws IOException
@@ -72,13 +74,31 @@ public class BaseConfig {
 	public void closebrowser(String browser, String username)
 	{
 		//Close the browser
-//		driver.close();
+		//		driver.close();
 		Reporter.log("Browser closed: "+browser, true);
-		
-		Reporter.log("Test execution completed by: "+username, true);
 
+		Reporter.log("Test execution completed by: "+username, true);
 	}
 
+	// Javascript Code
+	
+	public void jsClick(WebElement element) {
+		if (element == null)
+		{
+			throw new IllegalArgumentException("Element cannot be null");
+		}
+		else 
+		{
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+		}
+	}
+	
+	public void jsScrollIntoView(WebElement element) {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+	}
 
+	public void jsScrollToBottom() {
+		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,document.body.scrollHeight)");
+	}
 
 }

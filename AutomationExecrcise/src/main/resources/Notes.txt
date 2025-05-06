@@ -1,15 +1,4 @@
-Github 
-
-url:-
-
-
-username:- 
-
-
-
-
-
-
+GitHub :-
 For Create GitHub tokens-
 1.Click left side profile icon
 2.Click Settings
