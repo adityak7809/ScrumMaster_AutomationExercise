@@ -34,7 +34,8 @@ public class TestCase_12 extends BaseConfig {
 		ViewCartPage viewCartPageObj=new ViewCartPage(driver);
 
 		// 1. Launch browser- Script in BaseConfig
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
 		//Explicit Wait
 		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
 

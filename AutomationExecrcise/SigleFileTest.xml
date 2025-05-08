@@ -8,7 +8,7 @@
 	<parameter name="browser" value="edge"></parameter>
 	<parameter name="username" value="Aditya"></parameter>
     <classes>
-      <class name="Product_Test.TestCase_14"/>
+      <class name="Product_Test.TestCase_15"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

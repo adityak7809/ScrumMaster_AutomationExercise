@@ -1,8 +1,11 @@
 package Product_Test;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.util.Random;
 
 import org.apache.poi.EncryptedDocumentException;
+import org.openqa.selenium.WebElement;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -34,7 +37,8 @@ public class TestCase_01 extends BaseConfig {
 		SignupPage signupPageObj=new SignupPage(driver);
 
 		// 1. Launch browser- Script in BaseConfig
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
 		// 2. Navigate to url 'http://automationexercise.com'- Script in BaseConfig
 
 
@@ -59,6 +63,15 @@ public class TestCase_01 extends BaseConfig {
 			Reporter.log("'New User Signup!' is not visible",true);
 		}
 
+		//Generate Random mail-----------------------------------------------
+		Random ran=new Random();
+		int num1=ran.nextInt(1000);
+		int num2=ran.nextInt(1000);
+		String randomMail="abc"+num1+"xyz"+num2+"@mail.com";
+
+		//Write Data to Excel-----------------------------------------------
+		exObj.updateData("Create Account", 1, 1, randomMail);
+
 		//6. Enter name and email address
 		String name=exObj.readData("Create Account", 1, 0);
 		String email=exObj.readData("Create Account", 1, 1);
@@ -77,8 +90,9 @@ public class TestCase_01 extends BaseConfig {
 		}
 
 		//9. Fill details: Title, Name, Email, Password, Date of birth
-		String gender=exObj.readData("Create Account", 1, 2);
-		signupPageObj.selectGender(gender);
+		String genderData=exObj.readData("Create Account", 1, 2);
+		WebElement gender = signupPageObj.selectGender(genderData);
+		jsClick(gender);
 
 		String password=exObj.readData("Create Account", 1, 3);
 		signupPageObj.enterPassword(password);
@@ -112,7 +126,7 @@ public class TestCase_01 extends BaseConfig {
 
 		//13. Click 'Create Account button'
 		jsClick(signupPageObj.clickCreateAccount());
-		
+
 
 		//14. Verify that 'ACCOUNT CREATED!' is visible
 		boolean accountCreatedText = signupPageObj.isAccountCreatedSuccessfully();

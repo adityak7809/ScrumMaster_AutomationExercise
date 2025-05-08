@@ -36,7 +36,8 @@ public class TestCase_13 extends BaseConfig {
 		ViewCartPage viewCartPageObj=new ViewCartPage(driver);
 
 		// 1. Launch browser- Script in BaseConfig
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
 		// 2. Navigate to url 'http://automationexercise.com'- Script in BaseConfig
 
 		//Explicit Wait

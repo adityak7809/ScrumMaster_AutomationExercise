@@ -2,10 +2,8 @@ package Product_Test;
 
 import java.io.IOException;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -47,7 +45,8 @@ public class TestCase_14 extends BaseConfig {
 		PaymentPage paymentPageObj=new PaymentPage(driver);
 
 		// 1. Launch browser- Script in BaseConfig
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
 		//Explicit Wait
 		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -102,6 +101,15 @@ public class TestCase_14 extends BaseConfig {
 		// 8. Click 'Register / Login' button
 		viewCartPageObj.clickRegisterLogin();
 
+		//Generate Random mail
+		Random ran=new Random();
+		int num1=ran.nextInt(1000);
+		int num2=ran.nextInt(1000);
+		String randomMail="abc"+num1+"xyz"+num2+"@mail.com";
+
+		//Write Data to Excel
+		exObj.updateData("Create Account", 1, 1, randomMail);
+
 		// 9. Fill all details in Signup and create account
 		String name=exObj.readData("Create Account", 1, 0);
 		String email=exObj.readData("Create Account", 1, 1);
@@ -110,9 +118,11 @@ public class TestCase_14 extends BaseConfig {
 
 		loginPageObj.clickSignupButton();
 
-		String gender=exObj.readData("Create Account", 1, 2);
-		signupPageObj.selectGender(gender);
-		
+
+		String genderData=exObj.readData("Create Account", 1, 2);
+		WebElement gender = signupPageObj.selectGender(genderData);
+		jsClick(gender);
+
 
 		String password=exObj.readData("Create Account", 1, 3);
 		signupPageObj.enterPassword(password);
@@ -149,7 +159,7 @@ public class TestCase_14 extends BaseConfig {
 		} else {
 			Reporter.log("'ACCOUNT CREATED!' is not visible",true);
 		}
-		
+
 
 		// 11. Verify ' Logged in as username' at top
 		boolean loggedInText = homePageObj.isUserLoggedIn();
@@ -166,21 +176,28 @@ public class TestCase_14 extends BaseConfig {
 		viewCartPageObj.clickProceedToCheckout();
 
 		// 14. Verify Address Details and Review Your Order
-		List<WebElement> deleiveryDetails=checkoutPageObj.getDeliveryDetails();
-		List<WebElement> billingDetails=checkoutPageObj.getBillingDetails();
-		List<String> result1=new ArrayList<>();
-		List<String> result2=new ArrayList<>();
-		
-		for(int index1=1; index1<deleiveryDetails.size(); index1++)
-		{
-			String data1=deleiveryDetails.get(index1).getText();
-			result1.add(data1);
-			String data2=billingDetails.get(index1).getText();
-			result2.add(data2);
-		}
-		
-		if(result1.contains(result1))
-		{
+		String deliveryFullName=checkoutPageObj.getDelFullName();
+		String deliveryAddress1 =checkoutPageObj.getDelAddress1();
+		String deliveryAddress2 =checkoutPageObj.getDelAddress2();
+		String deliveryAddress3 =checkoutPageObj.getDelAddress3();
+		String deliveryCityStatePostcode =checkoutPageObj.getDelCityStatePostcode();
+		String deliveryCountry =checkoutPageObj.getDelCountry();
+		String deliveryPhone =checkoutPageObj.getDelPhone();
+
+		String billingFullName=checkoutPageObj.getBilFullName();
+		String billingAddress1 =checkoutPageObj.getBilAddress1();
+		String billingAddress2 =checkoutPageObj.getBilAddress2();
+		String billingAddress3 =checkoutPageObj.getBilAddress3();
+		String billingCityStatePostcode =checkoutPageObj.getBilCityStatePostcode();
+		String billingCountry =checkoutPageObj.getBilCountry();
+		String billingPhone =checkoutPageObj.getBilPhone();
+
+
+		if(deliveryFullName.equals(billingFullName) && deliveryAddress1.equals(billingAddress1) 
+				&& deliveryAddress2.equals(billingAddress2) && deliveryAddress3.equals(billingAddress3) 
+				&& deliveryCityStatePostcode.equals(billingCityStatePostcode) 
+				&& deliveryCountry.equals(billingCountry) && deliveryPhone.equals(billingPhone)) {
+
 			Reporter.log("Address Details are successfully verified",true);
 		}
 		else
@@ -197,11 +214,12 @@ public class TestCase_14 extends BaseConfig {
 			Reporter.log("Total Price: "+viewCartPageObj.getProductTotal(productIndex),true);
 			System.out.println("");
 		}
+		Reporter.log("Order review successfully verified",true);
 
 		// 15. Enter description in comment text area and click 'Place Order'
 		String msg=exObj.readData("Product Detail", 1, 2);
 		checkoutPageObj.clickCommentBox(msg);
-		
+
 		// 16. Enter payment details: Name on Card, Card Number, CVC, Expiration date
 		String name_on_card = exObj.readData("Payment Details", 1, 0);
 		String card_number = exObj.readData("Payment Details", 1, 1);
@@ -215,7 +233,9 @@ public class TestCase_14 extends BaseConfig {
 		jsClick(comfirmOrder);
 
 		// 18. Verify success message 'Your order has been placed successfully!'
-		boolean successMsg=paymentPageObj.isOrderConfirmed();
+		Thread.sleep(1000);
+		WebElement successMsgText= paymentPageObj.isOrderConfirmed();
+		boolean successMsg=successMsgText.isDisplayed();
 		if(successMsg==true)
 		{
 			Reporter.log("'Your order has been placed successfully!' verified successfully",true);
@@ -228,9 +248,7 @@ public class TestCase_14 extends BaseConfig {
 		// 19. Click 'Delete Account' button
 		homePageObj.clickOnDeleteAccount();
 
-
 		// 20. Verify 'ACCOUNT DELETED!' and click 'Continue' button
-		WebElement text5= driver.findElement(By.xpath("//h2/b[text()='Account Deleted!']"));
 		boolean accountDeletedText = deleteAccountPageObj.isAccountDeleted();
 		if(accountDeletedText==true) {
 			Reporter.log("'ACCOUNT DELETED!' is visible",true);

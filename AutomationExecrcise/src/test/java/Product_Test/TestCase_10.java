@@ -1,6 +1,7 @@
 package Product_Test;
 
 import java.io.IOException;
+import java.time.Duration;
 
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
@@ -28,7 +29,7 @@ public class TestCase_10 extends BaseConfig {
 		HomePage homePageObj=new HomePage(driver);
 
 		// 1. Launch browser- Script in BaseConfig
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
 		// 2. Navigate to url 'http://automationexercise.com'- Script in BaseConfig
 
@@ -55,7 +56,7 @@ public class TestCase_10 extends BaseConfig {
 		}
 
 		// 6. Enter email address in input and click arrow button
-		String subscriptionEmail = exObj.readData("Login Data", 1, 1);
+		String subscriptionEmail = exObj.readData("Create Account", 1, 1);
 		homePageObj.subscribeToNewsletter(subscriptionEmail);
 
 		// 7. Verify success message is visible

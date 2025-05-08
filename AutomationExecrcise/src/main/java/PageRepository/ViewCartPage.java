@@ -56,6 +56,14 @@ public class ViewCartPage{
 	public boolean isShoppingPageDisplayed() {
 		return shoppingPageTitle.isDisplayed();
 	}
+	
+	@FindBy(xpath = "//tbody/tr")
+	private WebElement showProduct;
+
+	// Verify product is addes
+	public boolean isProductDisplayed() {
+		return showProduct.isDisplayed();
+	}
 
 	// Get total product count
 	public int getTotalProductCount() {

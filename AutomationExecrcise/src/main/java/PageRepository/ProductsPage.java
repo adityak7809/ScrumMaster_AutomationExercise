@@ -30,21 +30,44 @@ public class ProductsPage {
     @FindBy(xpath = "//div[@class='single-products']/div/p")
     private List<WebElement> searchRelatedProduct;
     
-
-    // Filter Section
     
-    @FindBy(xpath = "//div[@class='left-sidebar']//a[contains(@href, '#Women')]")
-    private WebElement womenCategory;
-
-    @FindBy(xpath = "//div[@id='Women']//a[contains(text(), 'Dress ')]")
-    private WebElement womenDressSubcategory;
+    @FindBy(xpath = "//div[@class='brands_products']//h2")
+    private WebElement brandHeader;
     
-    @FindBy(xpath = "//div[@class='left-sidebar']//a[contains(@href, '#Men')]")
-    private WebElement menCategory;
-
-    @FindBy(xpath = "//div[@id='Men']//a[contains(text(), 'Tshirts')]")
-    private WebElement menTshirtsSubcategory;
-
+    public boolean isBrandHeaderDisplayed() {
+    	return brandHeader.isDisplayed();
+    }
+    
+    //Brand Polo
+    @FindBy(xpath = "//a[@href='/brand_products/Polo']")
+    private WebElement brandPolo;
+    
+    public WebElement clickBrandPolo() {
+    	return brandPolo;
+    }
+    
+    //Brand H_and_M
+    @FindBy(xpath = "//a[@href='/brand_products/H&M']")
+    private WebElement brandH_and_M;
+    
+    public WebElement clickBrandH_and_M() {
+    	return brandH_and_M;
+    }
+    
+    @FindBy(xpath = "//div[@class='features_items']/h2")
+    private WebElement brandTitle;
+    
+    public String getBrandTitleName() {
+    	return brandTitle.getText();
+    }
+    
+    public boolean isBrandTitledisplayed() {
+    	return brandTitle.isDisplayed();
+    }
+    
+    
+    
+    
 
     @FindBy(xpath = "//div[@class='productinfo text-center']/p")
     private List<WebElement> productNames;
@@ -100,26 +123,7 @@ public class ProductsPage {
     }
     
     
-   // Click on Women Category
-    public void clickWomenCatogory() {
-    	womenCategory.click();
-    }
-    
-    // Click on Women Subcategory
-    public void clickWomenDressSubcategory() {
-    	womenDressSubcategory.click();
-    }
-
-    // Click on Men Category
-    public void clickMenCatogory() {
-        menCategory.click();
-    }
-    
-    // Click on Men Subcategory
-    public void clickMenTshirtsSubcategory() {
-       menTshirtsSubcategory.click();
-    }
-
+   
 
     // Get Product Details
     public String getProductName(int index) {
@@ -133,6 +137,19 @@ public class ProductsPage {
     // Add Product to Cart
     public WebElement addProductToCart(int index) {
         return addToCartButtons.get(index);
+    }
+    
+    public List<WebElement> addAllproductTocart() {
+    	return addToCartButtons;
+    }
+    
+    // First Product "View Product" Button
+    @FindBy(xpath = "(//a[contains(text(), 'View Product')])[1]")
+    private WebElement firstViewProductButton;
+    
+   // Click "View Product" for the First Item
+    public WebElement clickFirstViewProduct() {
+    	return firstViewProductButton;
     }
     
     // View Cart Button

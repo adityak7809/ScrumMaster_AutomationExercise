@@ -1,114 +1,142 @@
 package Product_Test;
 
+import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import ExcelUtility.ReadExcelFile;
 import GenericRepository.BaseConfig;
 import ListnersUtility.Listners_Imp;
+import PageRepository.HomePage;
+import PageRepository.LoginPage;
+import PageRepository.ProductsPage;
+import PageRepository.ViewCartPage;
+import PropertyUtility.ReadPropertyFile;
 
 @Listeners(Listners_Imp.class)
 public class TestCase_20 extends BaseConfig {
 
 	@Test
-	public void Search_Products_and_Verify_Cart_After_Login() throws InterruptedException {
+	public void Search_Products_and_Verify_Cart_After_Login() throws InterruptedException, EncryptedDocumentException, IOException {
 
-		// Test data
-		String searchProduct = "T-Shirt"; // Product to search
-		String email = "oggy123@gmail.com"; // Replace with your email
-		String password = "abc123"; // Replace with your password
+		// Create Object Ref. variable
+		ReadExcelFile exObj=new ReadExcelFile();
+		ReadPropertyFile propObj=new ReadPropertyFile();
+
+		//POM Class
+		HomePage homePageObj=new HomePage(driver);
+		ProductsPage productsPageObj=new ProductsPage(driver);
+		ViewCartPage viewCartPageObj=new ViewCartPage(driver);
+		LoginPage loginPageObj=new LoginPage(driver);
 
 		// 1. Launch browser- Script in BaseConfig
-
-		// Javascript Code
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
 		// 2. Navigate to url 'http://automationexercise.com'- Script in BaseConfig
 
 		// 3. Click on 'Products' button
-		driver.findElement(By.xpath("//a[@href='/products']")).click();
-		System.out.println("Clicked on Products button");
+		homePageObj.clickProductsLink();
 
 		// 4. Verify user is navigated to ALL PRODUCTS page successfully
-		WebElement allProductsTitle = driver.findElement(By.xpath("//h2[text()='All Products']"));
-		if(allProductsTitle.isDisplayed()) {
-			System.out.println("Successfully navigated to ALL PRODUCTS page");
+		boolean allProductsHeader = productsPageObj.isAllproductHeaderDisplayed();
+		if (allProductsHeader==true) {
+			Reporter.log("User is navigated to ALL PRODUCTS page successfully",true);
 		} else {
-			System.out.println("Failed to navigate to ALL PRODUCTS page");
+			Reporter.log("User is not navigated to ALL PRODUCTS page successfully",true);
 		}
 
 		// 5. Enter product name in search input and click search button
-		driver.findElement(By.id("search_product")).sendKeys(searchProduct);
-		driver.findElement(By.id("submit_search")).click();
-		System.out.println("Searched for product: " + searchProduct);
+		String searchProductName = exObj.readData("Search Product", 1, 0);
+		productsPageObj.searchProduct(searchProductName);
 
 		// 6. Verify 'SEARCHED PRODUCTS' is visible
-		WebElement searchedProductsTitle = driver.findElement(By.xpath("//h2[text()='Searched Products']"));
-		if(searchedProductsTitle.isDisplayed()) {
-			System.out.println("'SEARCHED PRODUCTS' is visible");
+		boolean serachedProducts = productsPageObj.isSeachProductTitleDisplayed();
+		if (serachedProducts==true) {
+			Reporter.log("'SEARCHED PRODUCTS' is visible",true);
 		} else {
-			System.out.println("'SEARCHED PRODUCTS' is not visible");
+			Reporter.log("'SEARCHED PRODUCTS' is not visible",true);
 		}
 
 		// 7. Verify all the products related to search are visible
-		List<WebElement> products = driver.findElements(By.xpath("//div[contains(@class,'productinfo')]"));
-		if(products.size() > 0) {
-			System.out.println("Found " + products.size() + " products related to search");
-			for(WebElement product : products) {
-				String productName = product.findElement(By.tagName("p")).getText();
-				System.out.println(" - " + productName);
-			}
-		} 
-		else
+		List<WebElement> ProductsName = productsPageObj.searchedproductName();
+		for(WebElement displayedProductsName:ProductsName)
 		{
-			System.out.println("No products found for the search");
+			String prodName=displayedProductsName.getText();
+			String regex = "[" + searchProductName + "]";
+			if(prodName.matches(".*" + regex + ".*"))
+			{
+				Reporter.log("Product related to search is visible: "+prodName,true);
+			}
+			else 
+			{
+				Reporter.log("Product related to search is not visible: "+prodName,true);
+			}
 		}
 
 		// 8. Add those products to cart
-		List<WebElement> addToCartButtons = driver.findElements(By.xpath("//div[@class='single-products']/div[@class='productinfo text-center']//a[text()='Add to cart']"));
+		List<WebElement> addToCartButtons = productsPageObj.addAllproductTocart();
+		int cartItemsBeforeLogin = addToCartButtons.size();
 		for(WebElement button : addToCartButtons) 
 		{
-			js.executeScript("arguments[0].click();", button);
+			jsClick(button);
 			Thread.sleep(1000);
-			driver.findElement(By.xpath("//button[contains(text(),'Continue Shopping')]")).click();
+			productsPageObj.clickContinueShoppingButtons();
 		}
-		System.out.println("Added " + addToCartButtons.size() + " products to cart");
+		Reporter.log("Added " + addToCartButtons.size() + " products to cart",true);
 
 		// 9. Click 'Cart' button and verify that products are visible in cart
-		driver.findElement(By.xpath("//a[contains(text(),'Cart')]")).click();
+		WebElement cartLink=homePageObj.jsClickCartLink();
+		jsClick(cartLink);
 
-		List<WebElement> cartItems = driver.findElements(By.xpath("//table[@id='cart_info_table']/tbody/tr"));
-		if(cartItems.size() == addToCartButtons.size()) 
+		//verify that products are visible in cart
+		int totalCartitems = viewCartPageObj.getTotalProductCount();
+
+		if(totalCartitems == cartItemsBeforeLogin) 
 		{
-			System.out.println("All " + cartItems.size() + " products are visible in cart");
+			Reporter.log("All " + totalCartitems + " products are visible in cart",true);
 		} 
 		else
 		{
-			System.out.println("Mismatch in cart items. Expected: " + addToCartButtons.size() + ", Found: " + cartItems.size());
+			Reporter.log("Mismatch in cart items. Expected: " + cartItemsBeforeLogin + ", Found: " + totalCartitems,true);
 		}
+
 
 		// 10. Click 'Signup / Login' button and submit login details
-		driver.findElement(By.xpath("//a[contains(text(),'Signup / Login')]")).click();
-		driver.findElement(By.xpath("//input[@data-qa='login-email']")).sendKeys(email);
-		driver.findElement(By.xpath("//input[@data-qa='login-password']")).sendKeys(password);
-		driver.findElement(By.xpath("//button[@data-qa='login-button']")).click();
-		System.out.println("Logged in successfully");
+		homePageObj.clickSignupLoginLink();
+
+		String email=propObj.readData("login_email");
+		String password=propObj.readData("password");
+		loginPageObj.enterEmail(email); 
+		loginPageObj.enterPassword(password);
+
+		loginPageObj.clickLoginButton();
 
 		// 11. Again, go to Cart page
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//a[contains(text(),'Cart')]")).click();
+		boolean loggedInText = homePageObj.isUserLoggedIn();
+		if (loggedInText==true) {
+			Reporter.log("Logged in successfully",true);
+			homePageObj.clickCartLink();
 
-		// 12. Verify that those products are visible in cart after login as well
-		List<WebElement> cartItemsAfterLogin = driver.findElements(By.xpath("//table[@id='cart_info_table']/tbody/tr"));
-		if(cartItemsAfterLogin.size() == cartItems.size()) {
-			System.out.println("All " + cartItemsAfterLogin.size() + " products remain in cart after login");
+
+			// 12. Verify that those products are visible in cart after login as well
+			int cartItemsAfterLogin = viewCartPageObj.getTotalProductCount();
+			if(cartItemsAfterLogin == cartItemsBeforeLogin) {
+				System.out.println("All " + cartItemsAfterLogin + " products remain in cart after login");
+			} else {
+				System.out.println("Cart items changed after login. Before: " + cartItemsBeforeLogin + ", After: " + cartItemsAfterLogin);
+			}
 		} else {
-			System.out.println("Cart items changed after login. Before: " + cartItems.size() + ", After: " + cartItemsAfterLogin.size());
+			Reporter.log("Logged in unsuccessfully...! Your email or password is incorrect!",true);
 		}
+
+
+
 
 
 	}

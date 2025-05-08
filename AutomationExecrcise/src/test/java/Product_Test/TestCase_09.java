@@ -1,6 +1,7 @@
 package Product_Test;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
@@ -33,7 +34,8 @@ public class TestCase_09 extends BaseConfig {
 		ProductsPage productsPageObj=new ProductsPage(driver);
 
 		// 1. Launch browser- Script in BaseConfig
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
 		// 2. Navigate to url 'http://automationexercise.com'- Script in BaseConfig
 
 		// 3. Verify that home page is visible successfully

@@ -137,12 +137,19 @@ public class ProductDetailsPage {
 	public boolean writeYourReviewDisplayed() {
 		return writeReviewHeader.isDisplayed();
 	}
+	
+	public WebElement writeYourReviewheaderText() {
+		return writeReviewHeader;
+	}
 
 	// Submit a review
 	public void submitReview(String name, String email, String reviewText) {
 		reviewerNameInput.sendKeys(name);
 		reviewerEmailInput.sendKeys(email);
 		reviewTextarea.sendKeys(reviewText);
+	}
+	
+	public void clickSubmit() {
 		submitReviewButton.click();
 	}
 

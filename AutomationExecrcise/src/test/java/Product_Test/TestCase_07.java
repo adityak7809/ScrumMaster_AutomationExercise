@@ -1,6 +1,7 @@
 package Product_Test;
 
 import java.io.IOException;
+import java.time.Duration;
 
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
@@ -28,7 +29,8 @@ public class TestCase_07 extends BaseConfig {
 		TestCasesPage testCasesPageObj=new TestCasesPage(driver);
 
 		// 1. Launch browser- Script in BaseConfig
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
 		// 2. Navigate to url 'http://automationexercise.com'- Script in BaseConfig
 
 		// 3. Verify that home page is visible successfully

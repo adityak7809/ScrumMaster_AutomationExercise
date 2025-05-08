@@ -1,6 +1,7 @@
 package Product_Test;
 
 import java.io.IOException;
+import java.time.Duration;
 
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
@@ -29,7 +30,8 @@ public class TestCase_05 extends BaseConfig {
 		LoginPage loginPageObj=new LoginPage(driver);
 
 		// 1. Launch browser- Script in BaseConfig
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
 		// 2. Navigate to url 'http://automationexercise.com'- Script in BaseConfig
 
 		// 3. Verify that home page is visible successfully
@@ -54,8 +56,8 @@ public class TestCase_05 extends BaseConfig {
 		}
 
 		// 6. Enter name and email address
-		String name=exObj.readData("Login Data", 3, 0);
-		String email=exObj.readData("Login Data", 3, 1);
+		String name=propObj.readData("name");
+		String email=propObj.readData("login_email");
 		loginPageObj.enterSignupName(name);
 		loginPageObj.enterSignupEmail(email);
 

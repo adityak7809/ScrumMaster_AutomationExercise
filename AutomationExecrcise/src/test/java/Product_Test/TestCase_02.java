@@ -1,6 +1,7 @@
 package Product_Test;
 
 import java.io.IOException;
+import java.time.Duration;
 
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
@@ -31,7 +32,8 @@ public class TestCase_02 extends BaseConfig {
 		LoginPage loginPageObj=new LoginPage(driver);
 
 		// 1. Launch browser- Action in BaseConfig
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
 		// 2. Navigate to url 'http://automationexercise.com'- Action in BaseConfig
 
 		// 3. Verify that home page is visible successfully
@@ -44,6 +46,9 @@ public class TestCase_02 extends BaseConfig {
 			Reporter.log("Home page is not displayed", true);
 		}
 
+		//Add new valid account
+		createAccount();
+		
 		// 4. Click on 'Signup / Login' button
 		homePageObj.clickSignupLoginLink();
 
@@ -56,8 +61,8 @@ public class TestCase_02 extends BaseConfig {
 		}
 
 		// 6. Enter correct email address and password
-		String email=exObj.readData("Login Data", 1, 1);
-		String password=exObj.readData("Login Data", 1, 3);
+		String email=exObj.readData("Create Account", 1, 1);
+		String password=exObj.readData("Create Account", 1, 3);
 		loginPageObj.enterEmail(email); 
 		loginPageObj.enterPassword(password);
 
@@ -67,9 +72,9 @@ public class TestCase_02 extends BaseConfig {
 		// 8. Verify that 'Logged in as username' is visible
 		boolean loggedInText = homePageObj.isUserLoggedIn();
 		if (loggedInText==true) {
-			Reporter.log("'Logged in as username' is visible"+homePageObj.getLoggedInUsername(),true);
+			Reporter.log("'Logged in as username' is visible:- "+homePageObj.getLoggedInUsername(),true);
 		} else {
-			Reporter.log("'Logged in as username' is not visible"+homePageObj.getLoggedInUsername(),true);
+			Reporter.log("'Logged in as username' is not visible:- "+homePageObj.getLoggedInUsername(),true);
 		}
 
 		// 9. Click 'Delete Account' button

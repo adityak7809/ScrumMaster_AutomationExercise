@@ -1,60 +1,70 @@
 package Product_Test;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import java.io.IOException;
+import java.time.Duration;
+
 import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import ExcelUtility.ReadExcelFile;
 import GenericRepository.BaseConfig;
 import ListnersUtility.Listners_Imp;
+import PageRepository.HomePage;
+import PropertyUtility.ReadPropertyFile;
 
 @Listeners(Listners_Imp.class)
 public class TestCase_25 extends BaseConfig {
 
 	@Test
-	public void Verify_Scroll_Up_using_Arrow_button_and_Scroll_Down_functionality() {
-		
+	public void Verify_Scroll_Up_using_Arrow_button_and_Scroll_Down_functionality() throws IOException {
+
+		// Create Object Ref. variable
+		ReadExcelFile exObj=new ReadExcelFile();
+		ReadPropertyFile propObj=new ReadPropertyFile();
+
+		//POM Class
+		HomePage homePageObj=new HomePage(driver);
 		
 		// 1. Launch browser- Script in BaseConfig
-
-		// Javascript Code
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
 		// 2. Navigate to url 'http://automationexercise.com'- Script in BaseConfig
 
 		// 3. Verify that home page is visible successfully
-		String actualTitle = driver.getTitle();
-		if (actualTitle.equals("Automation Exercise")) {
-			System.out.println("Home page is visible successfully");
+		String expectedPageTitle = propObj.readData("homePageTitle");
+		String actualPageTitle = homePageObj.getHomePageTitle(driver);
+
+		if(actualPageTitle.equals(expectedPageTitle)) {
+			Reporter.log("Home page is visible successfully",true);
 		} else {
-			System.out.println("Home page is not displayed");
+			Reporter.log("Home page is not displayed", true);
 		}
 
 		// 4. Scroll down page to bottom
-		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-		System.out.println("Scrolled to bottom of page");
+		jsScrollToBottom();
+		Reporter.log("Scrolled to bottom of page",true);
 
 		// 5. Verify 'SUBSCRIPTION' is visible
-		WebElement subscription = driver.findElement(By.xpath("//h2[contains(text(),'Subscription')]"));
-		if (subscription.isDisplayed()) {
-			System.out.println("'SUBSCRIPTION' is visible");
+		boolean subscriptionHeader = homePageObj.isSubscriptionHeaderDisplayed();
+		if (subscriptionHeader==true) {
+			Reporter.log("'SUBSCRIPTION' text is visible",true);
 		} else {
-			System.out.println("'SUBSCRIPTION' is not visible");
+			Reporter.log("'SUBSCRIPTION' text is not visible",true);
 		}
 
 		// 6. Click on arrow at bottom right side to move upward
-		WebElement scrollUpArrow = driver.findElement(By.id("scrollUp"));
-		js.executeScript("arguments[0].click();", scrollUpArrow);
-		System.out.println("Clicked on scroll up arrow");
+		WebElement scrollUpArrow = homePageObj.ScrollUpButton();
+		jsClick(scrollUpArrow);
+		Reporter.log("Clicked on scroll up arrow",true);
 
 		// 7. Verify that page is scrolled up and 'Full-Fledged practice website for Automation Engineers' text is visible on screen
-		WebElement topText = driver.findElement(By.xpath("//h2[contains(text(),'Full-Fledged practice website for Automation Engineers')]"));
-
-		if (topText.isDisplayed()) {
-			System.out.println("Page is scrolled up and text is visible: " + topText.getText());
+		boolean  topText = homePageObj.istopTextDisplayed();
+		if (topText==true) {
+			Reporter.log("Page is scrolled up and text is visible",true);
 		} else {
-			System.out.println("Page scroll up verification failed");
+			Reporter.log("Page scroll up verification failed",true);
 		}
 
 

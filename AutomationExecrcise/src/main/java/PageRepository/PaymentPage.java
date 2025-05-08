@@ -28,7 +28,7 @@ public class PaymentPage {
     private WebElement payAndConfirmOrderButton;
 
     // Order Confirmation Elements
-    @FindBy(xpath = "(//div[contains(@class, 'alert-success')])[1]")
+    @FindBy(xpath = "//p[text()='Congratulations! Your order has been confirmed!']")
     private WebElement orderConfirmationMessage;
 
     @FindBy(xpath = "//a[contains(@href, '/download_invoice')]")
@@ -57,15 +57,22 @@ public class PaymentPage {
     }
 
     // Verify Order Confirmation
-    public boolean isOrderConfirmed() {
-        return orderConfirmationMessage.isDisplayed();
+    public WebElement isOrderConfirmed() {
+        return orderConfirmationMessage;
     }
 
 
     // Download Invoice
     public void clickDownloadInvoice() {
         downloadInvoiceButton.click();
-        System.out.println("invoice is downloaded successfully");
+    }
+    
+    //Continue Button
+    @FindBy(xpath = "//a[text()='Continue']")
+    private WebElement continueButton;
+    
+    public void clickContinueButton() {
+    	continueButton.click();
     }
 
 }

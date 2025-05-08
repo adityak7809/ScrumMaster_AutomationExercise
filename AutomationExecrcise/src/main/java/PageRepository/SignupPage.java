@@ -7,7 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 public class SignupPage {
-
+	
+	
 
 	// Page Title
 	@FindBy(xpath = "//b[text()= 'Enter Account Information']")
@@ -80,12 +81,14 @@ public class SignupPage {
 	}
 
 	// Select Gender (Mr. or Mrs.)
-	public void selectGender(String gender) {
+	public WebElement selectGender(String gender) {
 		if (gender.equalsIgnoreCase("Mr.")) {
-			genderMaleRadio.click();
+			return genderMaleRadio;
+			
 		} else if (gender.equalsIgnoreCase("Mrs.")) {
-			genderFemaleRadio.click();
+			return genderFemaleRadio;
 		}
+		return null;
 	}
 
 	// Set Password
@@ -141,7 +144,7 @@ public class SignupPage {
 
 	// Verify Account Creation Success
 	public boolean isAccountCreatedSuccessfully() {
-		return accountCreatedTitle.getText().equals("ACCOUNT CREATED!");
+		return accountCreatedTitle.isDisplayed();
 	}
 
 	// Click Continue Button

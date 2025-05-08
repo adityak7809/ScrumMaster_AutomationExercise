@@ -1,60 +1,65 @@
 package Product_Test;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import java.time.Duration;
+
 import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import ExcelUtility.ReadExcelFile;
 import GenericRepository.BaseConfig;
 import ListnersUtility.Listners_Imp;
+import PageRepository.HomePage;
+import PageRepository.ViewCartPage;
+import PropertyUtility.ReadPropertyFile;
 
 @Listeners(Listners_Imp.class)
 public class TestCase_22 extends BaseConfig {
 
 	@Test
 	public void  Add_to_cart_from_Recommended_items() throws InterruptedException {
-		
-		
+
+		// Create Object Ref. variable
+		ReadExcelFile exObj=new ReadExcelFile();
+		ReadPropertyFile propObj=new ReadPropertyFile();
+
+		//POM Class
+		HomePage homePageObj=new HomePage(driver);
+		ViewCartPage viewCartPageObj=new ViewCartPage(driver);
+
 		// 1. Launch browser- Script in BaseConfig
-
-		// Javascript Code
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
 		// 2. Navigate to url 'http://automationexercise.com'- Script in BaseConfig
 
 		// 3. Scroll to bottom of page
-		WebElement recommendedItems = driver.findElement(By.xpath("//h2[text()='recommended items']"));
-		js.executeScript("arguments[0].scrollIntoView(true)", recommendedItems);
-		System.out.println("Scrolled to bottom of page");
+		jsScrollToBottom();
+		Reporter.log("Scrolled to bottom of page",true);
 
 		// 4. Verify 'RECOMMENDED ITEMS' are visible
-
-		if (recommendedItems.isDisplayed()) {
-			System.out.println("'RECOMMENDED ITEMS' section is visible");
+		boolean recommendedItems=homePageObj.isRecommendedProductsHeaderDisplayed();
+		if (recommendedItems==true) {
+			Reporter.log("'RECOMMENDED ITEMS' section is visible",true);
 		} else {
-			System.out.println("'RECOMMENDED ITEMS' section is not visible");
+			Reporter.log("'RECOMMENDED ITEMS' section is not visible",true);
 		}
 
 		// 5. Click on 'Add To Cart' on Recommended product (first product)
-		WebElement addToCartButton = driver.findElement(By.xpath("//div[@class='recommended_items']//a[@data-product-id='1']"));
-		String productName = driver.findElement(By.xpath("//p[text()='Blue Top']")).getText();
-
-		js.executeScript("arguments[0].click();", addToCartButton);
-		System.out.println("Clicked 'Add To Cart' for product: " + productName);
+		WebElement addToCartButton = homePageObj.addProductToCart(0);
+		jsClick(addToCartButton);
 
 		// 6. Click on 'View Cart' button
 		Thread.sleep(1000);
-		WebElement viewCart = driver.findElement(By.xpath("//u[text()='View Cart']"));
-		js.executeScript("arguments[0].click();", viewCart);
-		System.out.println("Clicked 'View Cart' button");
+		WebElement viewCart = homePageObj.clickViewCartButtons();
+		jsClick(viewCart);
 
 		// 7. Verify that product is displayed in cart page
-		WebElement cartProduct = driver.findElement(By.xpath("//a[text()='" + productName + "']"));
-		if (cartProduct.isDisplayed()) {
-			System.out.println("Product '" + productName + "' is displayed in cart page");
+		boolean cartProduct = viewCartPageObj.isProductDisplayed();
+		if (cartProduct==true) {
+			Reporter.log("Product '" + viewCartPageObj.getProductName(0) + "' is displayed in cart page",true);
 		} else {
-			System.out.println("Product is not displayed in cart page");
+			Reporter.log("Product is not displayed in cart page",true);
 		}
 
 

@@ -60,7 +60,7 @@ public class TestCase_11 extends BaseConfig {
 		}
 
 		// 7. Enter email address in input and click arrow button
-		String subscriptionEmail = exObj.readData("Login Data", 1, 1);
+		String subscriptionEmail = exObj.readData("Create Account", 1, 1);
 		homePageObj.subscribeToNewsletter(subscriptionEmail);
 		
 		// 8. Verify success message is visible
