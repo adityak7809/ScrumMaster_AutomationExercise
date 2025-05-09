@@ -30,6 +30,9 @@ public class TestCase_15_Test extends BaseConfig {
 
 	@Test
 	public void PlaceOrder_Register_before_Checkout() throws InterruptedException, EncryptedDocumentException, IOException {
+		
+		TestCase_15_Test classObj=new TestCase_15_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

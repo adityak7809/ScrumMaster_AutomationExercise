@@ -21,6 +21,9 @@ public class TestCase_03_Test extends BaseConfig {
 
 	@Test
 	public void Login_User_with_incorrect_email_and_password() throws IOException {
+		
+		TestCase_03_Test classObj=new TestCase_03_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

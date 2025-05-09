@@ -24,6 +24,9 @@ public class TestCase_20_Test extends BaseConfig {
 
 	@Test
 	public void Search_Products_and_Verify_Cart_After_Login() throws InterruptedException, EncryptedDocumentException, IOException {
+		
+		TestCase_20_Test classObj=new TestCase_20_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

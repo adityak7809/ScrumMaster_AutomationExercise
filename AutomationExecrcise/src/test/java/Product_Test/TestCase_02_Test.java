@@ -21,6 +21,9 @@ public class TestCase_02_Test extends BaseConfig {
 
 	@Test
 	public void Login_User_with_correct_email_and_password() throws InterruptedException, IOException {
+		
+		TestCase_02_Test classObj=new TestCase_02_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

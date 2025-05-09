@@ -20,6 +20,9 @@ public class TestCase_07_Test extends BaseConfig {
 
 	@Test
 	public void Verify_Test_Cases_Page() throws IOException {
+		
+		TestCase_07_Test classObj=new TestCase_07_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadPropertyFile propObj=new ReadPropertyFile();

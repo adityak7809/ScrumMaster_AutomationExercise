@@ -20,6 +20,9 @@ public class TestCase_19_Test extends BaseConfig {
 
 	@Test
 	public void View_and_Cart_Brand_Products() {
+		
+		TestCase_19_Test classObj=new TestCase_19_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

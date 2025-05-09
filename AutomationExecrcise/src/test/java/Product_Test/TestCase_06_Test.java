@@ -22,6 +22,9 @@ public class TestCase_06_Test extends BaseConfig {
 
 	@Test
 	public void Contact_Us_Form() throws IOException {
+		
+		TestCase_06_Test classObj=new TestCase_06_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

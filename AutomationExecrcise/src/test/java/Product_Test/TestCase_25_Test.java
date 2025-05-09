@@ -19,6 +19,9 @@ public class TestCase_25_Test extends BaseConfig {
 
 	@Test
 	public void Verify_Scroll_Up_using_Arrow_button_and_Scroll_Down_functionality() throws IOException {
+		
+		TestCase_25_Test classObj=new TestCase_25_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

@@ -19,6 +19,9 @@ public class TestCase_18_Test extends BaseConfig {
 	@Test
 	public void ViewCategory_Products() throws InterruptedException {
 		
+		TestCase_18_Test classObj=new TestCase_18_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
+		
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

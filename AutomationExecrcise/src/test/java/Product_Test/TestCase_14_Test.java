@@ -29,6 +29,9 @@ public class TestCase_14_Test extends BaseConfig {
 
 	@Test
 	public void Place_Order_Register_while_Checkout() throws InterruptedException, IOException {
+		
+		TestCase_14_Test classObj=new TestCase_14_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();
@@ -45,7 +48,6 @@ public class TestCase_14_Test extends BaseConfig {
 		PaymentPage paymentPageObj=new PaymentPage(driver);
 
 		// 1. Launch browser- Script in BaseConfig
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		
 		//Explicit Wait
 		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -162,8 +164,8 @@ public class TestCase_14_Test extends BaseConfig {
 
 
 		// 11. Verify ' Logged in as username' at top
-		Thread.sleep(1000);
-		boolean loggedInText = homePageObj.isUserLoggedIn();
+		WebElement loggedInElement=homePageObj.getUserLoggedInElement();
+		boolean loggedInText = loggedInElement.isDisplayed();
 		if(loggedInText==true) {
 			Reporter.log("'Logged in as username' is visible",true);
 		} else {

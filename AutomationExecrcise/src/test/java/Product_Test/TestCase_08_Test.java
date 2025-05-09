@@ -21,6 +21,9 @@ public class TestCase_08_Test extends BaseConfig {
 
 	@Test
 	public void Verify_All_Products_and_product_detail_page() throws IOException {
+		
+		TestCase_08_Test classObj=new TestCase_08_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadPropertyFile propObj=new ReadPropertyFile();

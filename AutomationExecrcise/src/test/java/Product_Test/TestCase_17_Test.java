@@ -23,6 +23,9 @@ public class TestCase_17_Test extends BaseConfig {
 
 	@Test
 	public void Remove_Products_From_Cart() throws InterruptedException, IOException {
+		
+		TestCase_17_Test classObj=new TestCase_17_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

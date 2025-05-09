@@ -24,6 +24,9 @@ public class TestCase_09_Test extends BaseConfig {
 
 	@Test
 	public void Search_Product() throws IOException {
+		
+		TestCase_09_Test classObj=new TestCase_09_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

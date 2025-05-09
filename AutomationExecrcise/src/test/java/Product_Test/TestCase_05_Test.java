@@ -20,6 +20,9 @@ public class TestCase_05_Test extends BaseConfig {
 
 	@Test
 	public void Register_User_with_existing_email() throws IOException {
+		
+		TestCase_05_Test classObj=new TestCase_05_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

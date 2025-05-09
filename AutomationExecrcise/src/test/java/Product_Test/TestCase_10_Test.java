@@ -20,6 +20,9 @@ public class TestCase_10_Test extends BaseConfig {
 
 	@Test
 	public void Verify_Subscription_in_home_page() throws IOException {
+		
+		TestCase_10_Test classObj=new TestCase_10_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

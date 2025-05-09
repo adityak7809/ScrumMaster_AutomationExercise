@@ -23,6 +23,9 @@ public class TestCase_12_Test extends BaseConfig {
 
 	@Test
 	public void Add_Products_in_Cart() throws IOException {
+		
+		TestCase_12_Test classObj=new TestCase_12_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();
@@ -57,8 +60,8 @@ public class TestCase_12_Test extends BaseConfig {
 
 		// 5. Hover over first product and click 'Add to cart'
 		WebElement firstProduct = productsPageObj.addProductToCart(0);
-		jsScrollIntoView(firstProduct);
-		firstProduct.click();
+		jsClick(firstProduct);
+
 		
 
 		// 6. Click 'Continue Shopping' button
@@ -67,8 +70,8 @@ public class TestCase_12_Test extends BaseConfig {
 
 		// 7. Hover over second product and click 'Add to cart'
 		WebElement secondProduct = productsPageObj.addProductToCart(1);
-		jsScrollIntoView(secondProduct);
-		secondProduct.click();
+		jsClick(secondProduct);
+	
 
 		// 8. Click 'View Cart' button
 		WebElement viewCartButton = wait.until(ExpectedConditions.elementToBeClickable(productsPageObj.clickViewCartButtons()));

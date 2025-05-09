@@ -25,7 +25,10 @@ public class TestCase_01_Test extends BaseConfig {
 
 	@Test
 	public void Register_User() throws InterruptedException, EncryptedDocumentException, IOException {
-
+		
+		TestCase_01_Test classObj=new TestCase_01_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
+		
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();
 		ReadPropertyFile propObj=new ReadPropertyFile();

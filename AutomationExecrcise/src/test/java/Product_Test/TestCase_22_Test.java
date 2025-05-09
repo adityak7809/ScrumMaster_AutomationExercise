@@ -19,6 +19,9 @@ public class TestCase_22_Test extends BaseConfig {
 
 	@Test
 	public void  Add_to_cart_from_Recommended_items() throws InterruptedException {
+		
+		TestCase_22_Test classObj=new TestCase_22_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();

@@ -22,6 +22,9 @@ public class TestCase_21_Test extends BaseConfig {
 
 	@Test
 	public void Add_review_on_product() throws EncryptedDocumentException, IOException {
+		
+		TestCase_21_Test classObj=new TestCase_21_Test();
+		Reporter.log("Executing class:- "+"#"+printClassName(classObj)+"#",true);
 
 		// Create Object Ref. variable
 		ReadExcelFile exObj=new ReadExcelFile();
