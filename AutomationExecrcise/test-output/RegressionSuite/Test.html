@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>26/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Thu May 08 12:20:53 IST 2025</td>
+<td>Started on:</td><td>Fri May 09 16:27:16 IST 2025</td>
 </tr>
-<tr><td>Total time:</td><td>739 seconds (739204 ms)</td>
+<tr><td>Total time:</td><td>39 seconds (39395 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,6 +67,93 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED CONFIGURATIONS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='Product_Test.TestCase_02.closebrowser()'><b>closebrowser</b><br>Test class: Product_Test.TestCase_02<br>Parameters: edge, Aditya</td>
+<td><div><pre>org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: MicrosoftEdge=136.0.3240.50)
+Build info: version: &apos;4.29.0&apos;, revision: &apos;5fc1ec94cb&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [27d7bcab648b14f58ae74148af021dbf, close {}]
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 136.0.3240.50, fedcm:accounts: true, ms:edgeOptions: {debuggerAddress: localhost:51481}, msedge: {msedgedriverVersion: 136.0.3240.50 (4e2c41645f24..., userDataDir: C:\Users\adity\AppData\Loca...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51481/devtoo..., se:cdpVersion: 136.0.3240.50, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 27d7bcab648b14f58ae74148af021dbf
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:618)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:622)
+	at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:418)
+	at GenericRepository.BaseConfig.closebrowser(BaseConfig.java:83)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 30 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1337626348", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1337626348'><pre>org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: MicrosoftEdge=136.0.3240.50)
+Build info: version: &apos;4.29.0&apos;, revision: &apos;5fc1ec94cb&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [27d7bcab648b14f58ae74148af021dbf, close {}]
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 136.0.3240.50, fedcm:accounts: true, ms:edgeOptions: {debuggerAddress: localhost:51481}, msedge: {msedgedriverVersion: 136.0.3240.50 (4e2c41645f24..., userDataDir: C:\Users\adity\AppData\Loca...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51481/devtoo..., se:cdpVersion: 136.0.3240.50, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 27d7bcab648b14f58ae74148af021dbf
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:618)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:622)
+	at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:418)
+	at GenericRepository.BaseConfig.closebrowser(BaseConfig.java:83)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
+	at org.testng.internal.invokers.TestMethodWorker.invokeAfterClassMethods(TestMethodWorker.java:222)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:131)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:829)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:431)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:391)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+	at org.testng.TestNG.runSuites(TestNG.java:1099)
+	at org.testng.TestNG.run(TestNG.java:1067)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
+<td>Product_Test.TestCase_02@5e3f861</td></tr>
+</table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
@@ -76,255 +163,11 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='Product_Test.TestCase_09.Search_Product()'><b>Search_Product</b><br>Test class: Product_Test.TestCase_09<br/>
-<a href="#Output-1438936769" onClick='toggleBox("Output-1438936769", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-1438936769" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1438936769">
-Home page is visible successfully<br/>
-User is navigated to ALL PRODUCTS page successfully<br/>
-'SEARCHED PRODUCTS' is visible<br/>
-Product related to search is visible: Blue Top<br/>
-Product related to search is visible: Winter Top<br/>
-Product related to search is visible: Summer White Top<br/>
-Product related to search is visible: Madame Top For Women<br/>
-Product related to search is visible: Fancy Green Top<br/>
-Product related to search is visible: Sleeves Printed Top - White<br/>
-Product related to search is visible: Half Sleeves Top Schiffli Detailing - Pink<br/>
-Product related to search is visible: Frozen Tops For Kids<br/>
-Product related to search is visible: Full Sleeves Top Cherry - Pink<br/>
-Product related to search is visible: Printed Off Shoulder Top - White<br/>
-Product related to search is visible: Sleeves Top and Short - Blue & Pink<br/>
-Product related to search is not visible: Little Girls Mr. Panda  Shirt<br/>
-Product related to search is visible: Colour Blocked Shirt – Sky Blue<br/>
-Product related to search is visible: Lace Top For Women<br/>
-</div>
-</td>
-<td></td>
-<td>23</td>
-<td>Product_Test.TestCase_09@642a7222</td></tr>
-<tr>
-<td title='Product_Test.TestCase_22.Add_to_cart_from_Recommended_items()'><b>Add_to_cart_from_Recommended_items</b><br>Test class: Product_Test.TestCase_22<br/>
-<a href="#Output-1263831315" onClick='toggleBox("Output-1263831315", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-1263831315" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1263831315">
-Scrolled to bottom of page<br/>
-'RECOMMENDED ITEMS' section is visible<br/>
-Product 'Blue Top' is displayed in cart page<br/>
-</div>
-</td>
-<td></td>
-<td>5</td>
-<td>Product_Test.TestCase_22@17503f6b</td></tr>
-<tr>
-<td title='Product_Test.TestCase_04.Logout_User()'><b>Logout_User</b><br>Test class: Product_Test.TestCase_04<br/>
-<a href="#Output-1663485420" onClick='toggleBox("Output-1663485420", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-1663485420" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1663485420">
-Home page is visible successfully<br/>
-'Login to your account' is visible<br/>
-'Logged in as username' is visible:- Logged in as Aditya<br/>
-User is navigated to login page<br/>
-</div>
-</td>
-<td></td>
-<td>46</td>
-<td>Product_Test.TestCase_04@49b2a47d</td></tr>
-<tr>
-<td title='Product_Test.TestCase_17.Remove_Products_From_Cart()'><b>Remove_Products_From_Cart</b><br>Test class: Product_Test.TestCase_17<br/>
-<a href="#Output-1421969291" onClick='toggleBox("Output-1421969291", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-1421969291" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1421969291">
-Home page is visible successfully<br/>
-Cart page is displayed successfully<br/>
-Initial items in cart: 2<br/>
-Item deleted successfully<br/>
-Updated items in cart: 1<br/>
-Product was successfully removed from cart<br/>
-</div>
-</td>
-<td></td>
-<td>17</td>
-<td>Product_Test.TestCase_17@15d49048</td></tr>
-<tr>
-<td title='Product_Test.TestCase_20.Search_Products_and_Verify_Cart_After_Login()'><b>Search_Products_and_Verify_Cart_After_Login</b><br>Test class: Product_Test.TestCase_20<br/>
-<a href="#Output-419605775" onClick='toggleBox("Output-419605775", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-419605775" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-419605775">
-User is navigated to ALL PRODUCTS page successfully<br/>
-'SEARCHED PRODUCTS' is visible<br/>
-Product related to search is visible: Sleeveless  Dress<br/>
-Product related to search is visible: Stylish Dress<br/>
-Product related to search is visible: Sleeves Top and Short - Blue & Pink<br/>
-Product related to search is visible: Sleeveless Unicorn Patch Gown - Pink<br/>
-Product related to search is visible:  Cotton Mull Embroidered Dress<br/>
-Product related to search is visible: Blue Cotton Indie Mickey Dress<br/>
-Product related to search is visible: Long Maxi Tulle Fancy Dress Up Outfits -Pink<br/>
-Product related to search is visible: Sleeveless Unicorn Print Fit & Flare Net Dress - Multi<br/>
-Product related to search is visible: Rose Pink Embroidered Maxi Dress<br/>
-Added 9 products to cart<br/>
-All 9 products are visible in cart<br/>
-Logged in successfully<br/>
-</div>
-</td>
-<td></td>
-<td>38</td>
-<td>Product_Test.TestCase_20@13526e59</td></tr>
-<tr>
-<td title='Product_Test.TestCase_05.Register_User_with_existing_email()'><b>Register_User_with_existing_email</b><br>Test class: Product_Test.TestCase_05<br/>
-<a href="#Output-280526838" onClick='toggleBox("Output-280526838", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-280526838" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-280526838">
-Home page is visible successfully<br/>
-'New User Signup!' is visible<br/>
-'Email Address already exist!' is visible<br/>
-</div>
-</td>
-<td></td>
-<td>15</td>
-<td>Product_Test.TestCase_05@5be1d0a4</td></tr>
-<tr>
-<td title='Product_Test.TestCase_24.Download_Invoice_after_purchase_order()'><b>Download_Invoice_after_purchase_order</b><br>Test class: Product_Test.TestCase_24<br/>
-<a href="#Output-79703888" onClick='toggleBox("Output-79703888", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-79703888" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-79703888">
-Home page is visible successfully<br/>
-Cart page is displayed successfully<br/>
-'ACCOUNT CREATED!' is visible<br/>
-'Logged in as username' is visible<br/>
-Address Details are successfully verified<br/>
-Product Name: Blue Top<br/>
-Price: Rs. 500<br/>
-Quantity: 1<br/>
-Total Price: Rs. 500<br/>
-Product Name: Men Tshirt<br/>
-Price: Rs. 400<br/>
-Quantity: 1<br/>
-Total Price: Rs. 400<br/>
-Order review successfully verified<br/>
-'Your order has been placed successfully!' verified successfully<br/>
-invoice is downloaded successfully<br/>
-'ACCOUNT DELETED!' is visible<br/>
-</div>
-</td>
-<td></td>
-<td>42</td>
-<td>Product_Test.TestCase_24@3b6d844d</td></tr>
-<tr>
-<td title='Product_Test.TestCase_08.Verify_All_Products_and_product_detail_page()'><b>Verify_All_Products_and_product_detail_page</b><br>Test class: Product_Test.TestCase_08<br/>
-<a href="#Output-1885959288" onClick='toggleBox("Output-1885959288", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-1885959288" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1885959288">
-Home page is visible successfully<br/>
-User is navigated to ALL PRODUCTS page successfully<br/>
-Product list is visible<br/>
-User is landed to product details page<br/>
-Product details are visible:
-Product Name: Blue Top
-Product Category: Women > Tops
-Product Price: Rs. 500
-Product Availability: In Stock
-Product Condition: Condition: New
-Product Brand: Brand: Polo
-<br/>
-</div>
-</td>
-<td></td>
-<td>8</td>
-<td>Product_Test.TestCase_08@311bf055</td></tr>
-<tr>
-<td title='Product_Test.TestCase_11.Verify_Subscription_in_Cart_page()'><b>Verify_Subscription_in_Cart_page</b><br>Test class: Product_Test.TestCase_11<br/>
-<a href="#Output-859137638" onClick='toggleBox("Output-859137638", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-859137638" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-859137638">
-Home page is visible successfully<br/>
-'SUBSCRIPTION' text is visible<br/>
-'You have been successfully subscribed!' is visible<br/>
-</div>
-</td>
-<td></td>
-<td>6</td>
-<td>Product_Test.TestCase_11@21be3395</td></tr>
-<tr>
-<td title='Product_Test.TestCase_02.Login_User_with_correct_email_and_password()'><b>Login_User_with_correct_email_and_password</b><br>Test class: Product_Test.TestCase_02<br/>
-<a href="#Output-287095360" onClick='toggleBox("Output-287095360", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-287095360" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-287095360">
-Home page is visible successfully<br/>
-'Login to your account' is visible<br/>
-'Logged in as username' is visible:- Logged in as Aditya<br/>
-'ACCOUNT DELETED!' is visible<br/>
-</div>
-</td>
-<td></td>
-<td>32</td>
-<td>Product_Test.TestCase_02@5e3f861</td></tr>
-<tr>
-<td title='Product_Test.TestCase_06.Contact_Us_Form()'><b>Contact_Us_Form</b><br>Test class: Product_Test.TestCase_06<br/>
-<a href="#Output-305964128" onClick='toggleBox("Output-305964128", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-305964128" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-305964128">
-Home page is visible successfully<br/>
-'GET IN TOUCH' is visible<br/>
-'Success! Your details have been submitted successfully.' is visible<br/>
-</div>
-</td>
-<td></td>
-<td>15</td>
-<td>Product_Test.TestCase_06@415b0b49</td></tr>
-<tr>
-<td title='Product_Test.TestCase_12.Add_Products_in_Cart()'><b>Add_Products_in_Cart</b><br>Test class: Product_Test.TestCase_12<br/>
-<a href="#Output-470610323" onClick='toggleBox("Output-470610323", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-470610323" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-470610323">
-Home page is visible successfully<br/>
-Both products are added to Cart successfully<br/>
-Product Name: Blue Top<br/>
-Price: Rs. 500<br/>
-Quantity: 1<br/>
-Total Price: Rs. 500<br/>
-Product Name: Men Tshirt<br/>
-Price: Rs. 400<br/>
-Quantity: 1<br/>
-Total Price: Rs. 400<br/>
-</div>
-</td>
-<td></td>
-<td>10</td>
-<td>Product_Test.TestCase_12@4f49f6af</td></tr>
-<tr>
-<td title='Product_Test.TestCase_25.Verify_Scroll_Up_using_Arrow_button_and_Scroll_Down_functionality()'><b>Verify_Scroll_Up_using_Arrow_button_and_Scroll_Down_functionality</b><br>Test class: Product_Test.TestCase_25<br/>
-<a href="#Output-1968588425" onClick='toggleBox("Output-1968588425", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-1968588425" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1968588425">
-Home page is visible successfully<br/>
-Scrolled to bottom of page<br/>
-'SUBSCRIPTION' text is visible<br/>
-Clicked on scroll up arrow<br/>
-Page is scrolled up and text is visible<br/>
-</div>
-</td>
-<td></td>
-<td>0</td>
-<td>Product_Test.TestCase_25@36804139</td></tr>
-<tr>
 <td title='Product_Test.TestCase_01.Register_User()'><b>Register_User</b><br>Test class: Product_Test.TestCase_01<br/>
-<a href="#Output-1045718836" onClick='toggleBox("Output-1045718836", this, "Show output", "Hide output");'>Show output</a>
+<a href="#Output-591824146" onClick='toggleBox("Output-591824146", this, "Show output", "Hide output");'>Show output</a>
 
-<a href="#Output-1045718836" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1045718836">
+<a href="#Output-591824146" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-591824146">
 Home page is visible successfully<br/>
 'New User Signup!' is visible<br/>
 'ENTER ACCOUNT INFORMATION' is visible<br/>
@@ -334,225 +177,8 @@ Home page is visible successfully<br/>
 </div>
 </td>
 <td></td>
-<td>11</td>
+<td>24</td>
 <td>Product_Test.TestCase_01@29f7cefd</td></tr>
-<tr>
-<td title='Product_Test.TestCase_21.Add_review_on_product()'><b>Add_review_on_product</b><br>Test class: Product_Test.TestCase_21<br/>
-<a href="#Output-7788116" onClick='toggleBox("Output-7788116", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-7788116" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-7788116">
-User is navigated to ALL PRODUCTS page successfully<br/>
-'Write Your Review' section is visible<br/>
-Entered review details<br/>
-'Thank you for your review.' is visible <br/>
-</div>
-</td>
-<td></td>
-<td>17</td>
-<td>Product_Test.TestCase_21@2235eaab</td></tr>
-<tr>
-<td title='Product_Test.TestCase_07.Verify_Test_Cases_Page()'><b>Verify_Test_Cases_Page</b><br>Test class: Product_Test.TestCase_07<br/>
-<a href="#Output-699026377" onClick='toggleBox("Output-699026377", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-699026377" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-699026377">
-Home page is visible successfully<br/>
-User is navigated to test cases page successfully<br/>
-</div>
-</td>
-<td></td>
-<td>11</td>
-<td>Product_Test.TestCase_07@6d5620ce</td></tr>
-<tr>
-<td title='Product_Test.TestCase_18.ViewCategory_Products()'><b>ViewCategory_Products</b><br>Test class: Product_Test.TestCase_18<br/>
-<a href="#Output-1790696670" onClick='toggleBox("Output-1790696670", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-1790696670" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1790696670">
-Categories section is visible on left side bar<br/>
-Clicked on Women category<br/>
-Clicked on Dress subcategory<br/>
-Category page is displayed with correct title: WOMEN - DRESS PRODUCTS<br/>
-Clicked on TShirt subcategory under Men<br/>
-Successfully navigated to Men's TShirt category page: MEN - TSHIRTS PRODUCTS<br/>
-</div>
-</td>
-<td></td>
-<td>7</td>
-<td>Product_Test.TestCase_18@7098b907</td></tr>
-<tr>
-<td title='Product_Test.TestCase_26.Verify_Scroll_Up_without_Arrow_button_and_Scroll_Down_functionality()'><b>Verify_Scroll_Up_without_Arrow_button_and_Scroll_Down_functionality</b><br>Test class: Product_Test.TestCase_26<br/>
-<a href="#Output-1016481907" onClick='toggleBox("Output-1016481907", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-1016481907" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1016481907">
-Home page is visible successfully<br/>
-Scrolled to bottom of page<br/>
-'SUBSCRIPTION' text is visible<br/>
-Scrolled back to top of page<br/>
-Page is scrolled up and text is visible<br/>
-</div>
-</td>
-<td></td>
-<td>1</td>
-<td>Product_Test.TestCase_26@20bd8be5</td></tr>
-<tr>
-<td title='Product_Test.TestCase_16.Place_Order_Login_before_Checkout()'><b>Place_Order_Login_before_Checkout</b><br>Test class: Product_Test.TestCase_16<br/>
-<a href="#Output-1942416364" onClick='toggleBox("Output-1942416364", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-1942416364" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1942416364">
-Home page is visible successfully<br/>
-'Logged in as username' is visibleLogged in as Aditya<br/>
-Cart page is displayed successfully<br/>
-Address Details are successfully verified<br/>
-Product Name: Blue Top<br/>
-Price: Rs. 500<br/>
-Quantity: 1<br/>
-Total Price: Rs. 500<br/>
-Product Name: Men Tshirt<br/>
-Price: Rs. 400<br/>
-Quantity: 1<br/>
-Total Price: Rs. 400<br/>
-Order review successfully verified<br/>
-'Your order has been placed successfully!' verified successfully<br/>
-'ACCOUNT DELETED!' is visible<br/>
-</div>
-</td>
-<td></td>
-<td>76</td>
-<td>Product_Test.TestCase_16@4470fbd6</td></tr>
-<tr>
-<td title='Product_Test.TestCase_14.Place_Order_Register_while_Checkout()'><b>Place_Order_Register_while_Checkout</b><br>Test class: Product_Test.TestCase_14<br/>
-<a href="#Output-202734271" onClick='toggleBox("Output-202734271", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-202734271" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-202734271">
-Home page is visible successfully<br/>
-Cart page is displayed successfully<br/>
-'ACCOUNT CREATED!' is visible<br/>
-'Logged in as username' is visible<br/>
-Address Details are successfully verified<br/>
-Product Name: Blue Top<br/>
-Price: Rs. 500<br/>
-Quantity: 1<br/>
-Total Price: Rs. 500<br/>
-Product Name: Men Tshirt<br/>
-Price: Rs. 400<br/>
-Quantity: 1<br/>
-Total Price: Rs. 400<br/>
-Order review successfully verified<br/>
-'Your order has been placed successfully!' verified successfully<br/>
-'ACCOUNT DELETED!' is visible<br/>
-</div>
-</td>
-<td></td>
-<td>51</td>
-<td>Product_Test.TestCase_14@147e2ae7</td></tr>
-<tr>
-<td title='Product_Test.TestCase_03.Login_User_with_incorrect_email_and_password()'><b>Login_User_with_incorrect_email_and_password</b><br>Test class: Product_Test.TestCase_03<br/>
-<a href="#Output-784882213" onClick='toggleBox("Output-784882213", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-784882213" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-784882213">
-Home page is visible successfully<br/>
-'Login to your account' is visible<br/>
-'Your email or password is incorrect!' is visible<br/>
-</div>
-</td>
-<td></td>
-<td>4</td>
-<td>Product_Test.TestCase_03@2fb0623e</td></tr>
-<tr>
-<td title='Product_Test.TestCase_23.Verify_address_details_in_checkout_page()'><b>Verify_address_details_in_checkout_page</b><br>Test class: Product_Test.TestCase_23<br/>
-<a href="#Output-1620744559" onClick='toggleBox("Output-1620744559", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-1620744559" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1620744559">
-Home page is visible successfully<br/>
-'ACCOUNT CREATED!' is visible<br/>
-'Logged in as username' is visible<br/>
-Cart page is displayed successfully<br/>
-Delivery address matches registration address<br/>
-Billing address matches registration address<br/>
-'ACCOUNT DELETED!' is visible<br/>
-</div>
-</td>
-<td></td>
-<td>48</td>
-<td>Product_Test.TestCase_23@3bcd05cb</td></tr>
-<tr>
-<td title='Product_Test.TestCase_15.PlaceOrder_Register_before_Checkout()'><b>PlaceOrder_Register_before_Checkout</b><br>Test class: Product_Test.TestCase_15<br/>
-<a href="#Output-1823047135" onClick='toggleBox("Output-1823047135", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-1823047135" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1823047135">
-Home page is visible successfully<br/>
-'ACCOUNT CREATED!' is visible<br/>
-'Logged in as username' is visible<br/>
-Cart page is displayed successfully<br/>
-Address Details are successfully verified<br/>
-Product Name: Blue Top<br/>
-Price: Rs. 500<br/>
-Quantity: 1<br/>
-Total Price: Rs. 500<br/>
-Product Name: Men Tshirt<br/>
-Price: Rs. 400<br/>
-Quantity: 1<br/>
-Total Price: Rs. 400<br/>
-Order review successfully verified<br/>
-'Your order has been placed successfully!' verified successfully<br/>
-'ACCOUNT DELETED!' is visible<br/>
-</div>
-</td>
-<td></td>
-<td>35</td>
-<td>Product_Test.TestCase_15@448c8166</td></tr>
-<tr>
-<td title='Product_Test.TestCase_13.Verify_Product_quantity_in_Cart()'><b>Verify_Product_quantity_in_Cart</b><br>Test class: Product_Test.TestCase_13<br/>
-<a href="#Output-2051535038" onClick='toggleBox("Output-2051535038", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-2051535038" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-2051535038">
-Home page is visible successfully<br/>
-Product details page is displayed<br/>
-Product quantity in cart matches expected quantity<br/>
-</div>
-</td>
-<td></td>
-<td>4</td>
-<td>Product_Test.TestCase_13@78452606</td></tr>
-<tr>
-<td title='Product_Test.TestCase_19.View_and_Cart_Brand_Products()'><b>View_and_Cart_Brand_Products</b><br>Test class: Product_Test.TestCase_19<br/>
-<a href="#Output-2072843575" onClick='toggleBox("Output-2072843575", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-2072843575" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-2072843575">
-Brands section is visible on left side bar<br/>
-Successfully navigated to BRAND - POLO PRODUCTS brand page<br/>
-Brand products are displayed successfully	<br/>
-Successfully navigated to BRAND - H&M PRODUCTS brand page<br/>
-Brand products are displayed successfully	<br/>
-</div>
-</td>
-<td></td>
-<td>4</td>
-<td>Product_Test.TestCase_19@503f91c3</td></tr>
-<tr>
-<td title='Product_Test.TestCase_10.Verify_Subscription_in_home_page()'><b>Verify_Subscription_in_home_page</b><br>Test class: Product_Test.TestCase_10<br/>
-<a href="#Output-1563833544" onClick='toggleBox("Output-1563833544", this, "Show output", "Hide output");'>Show output</a>
-
-<a href="#Output-1563833544" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1563833544">
-Home page is visible successfully<br/>
-'SUBSCRIPTION' text is visible<br/>
-'You have been successfully subscribed!' is visible<br/>
-</div>
-</td>
-<td></td>
-<td>0</td>
-<td>Product_Test.TestCase_10@7d322cad</td></tr>
 </table><p>
 </body>
 </html>
