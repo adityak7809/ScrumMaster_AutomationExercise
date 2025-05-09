@@ -162,6 +162,7 @@ public class TestCase_14_Test extends BaseConfig {
 
 
 		// 11. Verify ' Logged in as username' at top
+		Thread.sleep(1000);
 		boolean loggedInText = homePageObj.isUserLoggedIn();
 		if(loggedInText==true) {
 			Reporter.log("'Logged in as username' is visible",true);
