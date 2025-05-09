@@ -13,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import ExcelUtility.ReadExcelFile;
@@ -31,7 +32,8 @@ public class BaseConfig {
 
 	@Parameters({"browser", "username"})
 	@BeforeClass
-	public void browserSetup(String browser, String username) throws IOException
+	public void browserSetup( @Optional("chrome") String browser, 
+		    @Optional("defaultUser") String username) throws IOException
 	{
 
 		//Step 1: Create Object for All Library

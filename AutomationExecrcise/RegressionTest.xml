@@ -5,11 +5,11 @@
 		<listener class-name="ListnersUtility.Listners_Imp"/>
 	</listeners>
   <test thread-count="5" name="Test">
-	<parameter name="browser" value="edge"></parameter>
+	<parameter name="browser" value="chrome"></parameter>
 	<parameter name="username" value="Aditya"></parameter>
     <classes>
 	  <class name="Product_Test.TestCase_01_Test"/>
-	  <class name="Product_Test.TestCase_02_Test"/>
+   <class name="Product_Test.TestCase_02_Test"/>
 	  <class name="Product_Test.TestCase_03_Test"/>
 	  <class name="Product_Test.TestCase_04_Test"/>
 	  <class name="Product_Test.TestCase_05_Test"/>
